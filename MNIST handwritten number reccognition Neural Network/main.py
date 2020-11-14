@@ -13,6 +13,15 @@ traindata = torch.utils.data.DataLoader(datasets.MNIST('data', train = True, dow
                                                       transforms.Normalize((0.1307,),(0.3081,))])), batch_size = 48, shuffle = True, **kwargs)
 testdata = torch.utils.data.DataLoader(datasets.MNIST('data', train = False, transform = transforms.Compose([transforms.ToTensor(),
                                                       transforms.Normalize((0.1307,),(0.3081,))])), batch_size = 48, shuffle = True, **kwargs)
+class Net(nn.Module):
+    def __init__(self):
+        pass
+
+    def forward(self, x):
+        pass
+
+model = Net()
+model.cuda()
 
 optimizer = optim.SGD(model.parameters(), lr = 0.1, momentum = 0.7)
 
