@@ -10,6 +10,7 @@ from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 showimages=False
 epochs = 2
@@ -77,6 +78,9 @@ class Net(nn.Module):
 net = Net()
 net.cuda()
 
+if os.path.isfile('savednet.pt'):
+    net = torch.load('savednet.pt')
+
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
@@ -122,3 +126,4 @@ def test():
 for epoch in range(1, epochs):
     train(epoch)
     test()
+    torch.save(net, 'savednet.pt')
