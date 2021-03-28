@@ -11,9 +11,14 @@ from torch.optim.lr_scheduler import StepLR
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+import graph
+
 
 showimages=False
-epochs = 2
+showgraph=True
+
+epochs = 20
+
 
 kwargs = {'num_workers':0, 'pin_memory': True}
 
@@ -102,6 +107,7 @@ def train(epoch):
 
 
 
+
 def test():
     net.eval()
     testloss = 0
@@ -118,6 +124,12 @@ def test():
     print('\nTest set: Average loss: {:.4f}, Accuracy: {}/{} ({:.0f}%)\n'.format(
         loss, correct, len(testloader.dataset),
         100. * correct / len(testloader.dataset)))
+    graph.append2y(100. * correct / len(testloader.dataset))
+    if  graph.showgraph==True:
+        graph.main()
+    elif showgraph==True:
+        graph.showgraph=True
+
 
 
 
